@@ -1,0 +1,29 @@
+{
+  "name": "underscore",
+  "version": "1.0.0",
+  "description": "A simple language written in JavaScript using NodeJS",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "test": "npx mocha --require esm"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xFarish/Underscore.git"
+  },
+  "keywords": [
+    "language"
+  ],
+  "author": "Farish",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xFarish/Underscore/issues"
+  },
+  "homepage": "https://github.com/xFarish/Underscore#readme",
+  "dependencies": {
+    "assemblyscript": "^0.19.4"
+  },
+  "devDependencies": {
+    "pkg": "^5.3.0"
+  }
+}
