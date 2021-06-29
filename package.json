@@ -5,8 +5,7 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "test:windows": "./test.sh",
-    "test:posix": ".\\test.ps1"
+    "test": "npx mocha"
   },
   "repository": {
     "type": "git",
@@ -25,6 +24,7 @@
     "assemblyscript": "^0.19.4"
   },
   "devDependencies": {
+    "mocha": "^9.0.1",
     "pkg": "^5.3.0"
   }
 }

@@ -1,12 +1,18 @@
 import { Tokenizer } from '../src/core/tokenizer.js';
+import { describe, it } from 'mocha';
 
-const tokenizer = new Tokenizer(
-    `hello_world 123, (123, 8192) / *0 819jw
-    \
-    `
-).init();
+describe('Tokenizer', () => {
+    it('Basic numbers', async () => {
+        const tokenizer = new Tokenizer(`12 791 9102 7182 9102`).init();
+        
+        console.log(tokenizer.results());
+        tokenizer.clear();
+    });
 
-export const results = tokenizer.results();
-
-console.log(results);
-tokenizer.clear();
+    it('Basic numbers with operations', async () => {
+        const tokenizer = new Tokenizer(`(12 * 791) + 9102 / 7182 - 9102`).init();
+        
+        console.log(tokenizer.results());
+        tokenizer.clear();
+    });
+});
