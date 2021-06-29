@@ -58,6 +58,24 @@ export class Tokenizer {
                 this.tokens.push({ type: 'Word', value: value });
             }
 
+            else if (now === '\'' || now === '"') {
+                const quote: '\'' | '"' = now;
+                let value: string = '';
+                this.index += 1;
+                now = this.input[this.index] || '';
+
+                while (now !== quote) {
+                    value += now;
+                    this.index += 1;
+                    now = this.input[this.index] || '';
+                }
+
+                this.index += 1;
+                now = this.input[this.index] || '';
+
+                this.tokens.push({ type: 'String', value: value });
+            }
+
             else if (this.isOperator(now)) {
                 let value = now;
                 this.index += 1;
