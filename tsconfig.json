@@ -1,0 +1,37 @@
+{
+  "exclude": ["node_modules/**/*", "test/**/*", "dist/**/*"],
+  "include": ["src/**/*.js", "src/*.ts"],
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "allowJs": true,
+    "checkJs": true,
+    "declaration": true,
+    "outDir": "./dist/lib",
+    "rootDir": "./src",
+    "removeComments": true,
+
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  }
+}
