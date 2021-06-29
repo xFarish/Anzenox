@@ -1,4 +1,4 @@
-import { Tokenizer } from '../src/core/tokenizer.js';
+import { Tokenizer } from '../dist/export.js';
 import { describe, it } from 'mocha';
 
 describe('Tokenizer', () => {
