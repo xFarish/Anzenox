@@ -5,7 +5,8 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "test": "npx mocha --require esm"
+    "test:windows": "./test.sh",
+    "test:posix": ".\\test.ps1"
   },
   "repository": {
     "type": "git",

@@ -10,6 +10,10 @@ export class Tokenizer {
      * @example
      * ```js
      * const tokenizer = new Tokenizer("1002 - 81.912 + (92 * 7)");
+     * const result = tokenizer.init().results();
+     * 
+     * // Reset everything
+     * tokenizer.clear();
      * ```
      */
     constructor(input) {
@@ -24,6 +28,11 @@ export class Tokenizer {
 
             if (this.isEmpty(now)) {
                 this.#index += 1;
+            }
+
+            else if (now === '(' || now === ')' || now === '{' || now === '}' || now === '[' || now === ']') {
+                this.#index += 1;
+                this.#tokens.push({ type: 'Parentheses', value: now });
             }
 
             else if (this.isNumeric(now)) {
@@ -76,7 +85,13 @@ export class Tokenizer {
 
                 this.#tokens.push({ type: 'Op', value: value });
             }
+            
+            else {
+                throw new Error('[INVALID]: Error: invalid character: ' + now);
+            }
         }
+
+        return this;
     }
 
     /**
@@ -111,7 +126,7 @@ export class Tokenizer {
      * @private
      */
     isOperator(c) {
-        return ((c >= '!' && c <= '~') && (!this.isNumeric(c)));
+        return ((c >= '!' && c <= '~') && (!this.isAlphaNumeric(c)));
     }
 
     results() {
@@ -119,8 +134,8 @@ export class Tokenizer {
     }
 
     clear() {
-        this.#tokens = [];
-        this.#input = '';
-        this.#index = 0;
+        this.#tokens = undefined;
+        this.#input = undefined;
+        this.#index = undefined;
     }
 }
