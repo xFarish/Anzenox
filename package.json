@@ -8,8 +8,8 @@
     "azc": "dist/anzen.js"
   },
   "scripts": {
-    "bundle": "npx webpack",
-    "build": "npx tsc",
+    "bundle": "node bundle.cjs",
+    "ts": "npx tsc",
     "watch": "npx tsc --watch",
     "test": "npx mocha"
   },
@@ -33,6 +33,7 @@
   "devDependencies": {
     "@types/command-line-args": "^5.0.0",
     "@types/node": "^15.12.5",
+    "esbuild": "^0.12.12",
     "mocha": "^9.0.1",
     "typescript": "^4.3.4"
   }

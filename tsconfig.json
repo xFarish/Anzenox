@@ -7,7 +7,7 @@
     "allowJs": true,
     "checkJs": true,
     "declaration": true,
-    "outDir": "./dist/",
+    "outDir": "./dist/anzen",
     "rootDir": "./src",
     "removeComments": true,
 
