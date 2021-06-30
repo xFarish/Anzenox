@@ -2,10 +2,10 @@
   "name": "anzen",
   "version": "1.0.0",
   "description": "A simple language written in JavaScript using NodeJS",
-  "main": "dist/index.js",
+  "main": "dist/cli.js",
   "type": "module",
   "bin": {
-    "vm": "dist/vm.js"
+    "azc": "dist/cli.js"
   },
   "scripts": {
     "build": "npx tsc",
@@ -26,7 +26,9 @@
   },
   "homepage": "https://github.com/xFarish/Underscore#readme",
   "dependencies": {
-    "assemblyscript": "^0.19.4"
+    "@types/command-line-args": "^5.0.0",
+    "assemblyscript": "^0.19.4",
+    "command-line-args": "^5.1.1"
   },
   "devDependencies": {
     "@types/node": "^15.12.5",
