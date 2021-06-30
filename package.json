@@ -1,9 +1,12 @@
 {
-  "name": "underscore",
+  "name": "anzen",
   "version": "1.0.0",
   "description": "A simple language written in JavaScript using NodeJS",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "type": "module",
+  "bin": {
+    "vm": "dist/vm.js"
+  },
   "scripts": {
     "build": "npx tsc",
     "watch": "npx tsc --watch",

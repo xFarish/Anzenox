@@ -1,7 +1,7 @@
 import { promises, existsSync } from 'fs';
 import { error } from '../utils/error.js';
 
-export async function anzenRead(path: string): Promise<Buffer | never> {
+export async function anzenWrite(path: string, buf: Buffer | Uint8Array): Promise<void | never> {
     try {
         if (!path.toString().endsWith('.anc')) {
             error('INVALID', 'The file must ends with \'.anc\'.');
@@ -17,12 +17,13 @@ export async function anzenRead(path: string): Promise<Buffer | never> {
             error('INVALID', 'The path given is a directory. Expected a file.');
             return process.exit(1);
         }
-    
+
         else {
-            return await promises.readFile(path);
+            const file = await promises.open(path, 'w');
+            await promises.write(file, buf, 0);
         }
     } catch (e) {
-        error('ERR', 'There was an error while reading the file.');
+        error('ERR', 'There was an error while writing the file.');
         error((e as Error).name, (e as Error).message);
         return process.exit();
     }
