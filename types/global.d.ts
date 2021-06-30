@@ -1,8 +1,10 @@
-export namespace Underscore {
+export namespace Anzen {
     interface Token {
-        type: string;
+        type: TokenType;
         value: string;
     }
+
+    type TokenType = 'Brckt' | 'Num' | 'Wrd' | 'Op'
     
     interface AST {
         type: string;
