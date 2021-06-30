@@ -8,6 +8,7 @@
     "azc": "dist/anzen.js"
   },
   "scripts": {
+    "bundle": "npx webpack",
     "build": "npx tsc",
     "watch": "npx tsc --watch",
     "test": "npx mocha"
