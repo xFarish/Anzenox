@@ -1,6 +1,6 @@
 {
   "exclude": ["node_modules/**/*", "test/**/*", "dist/**/*"],
-  "include": ["src/**/*.js", "src/*.ts"],
+  "include": ["src/**/*.js", "src/*.ts", "src/utils/info.ts"],
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
