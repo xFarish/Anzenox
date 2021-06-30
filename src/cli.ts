@@ -1,7 +1,7 @@
 import { readFileSync } from 'fs';
 import { parse } from './utils/args.js';
 
-async function main() {
+export async function main() {
     const cli = parse();
 
     if ((cli as any).help) {
@@ -30,5 +30,3 @@ async function main() {
         return console.log(help.join('\n'));
     }
 }
-
-main();
