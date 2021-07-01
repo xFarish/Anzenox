@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/xFarish/Underscore#readme",
   "dependencies": {
-    "assemblyscript": "^0.19.4",
+    "binaryen": "^101.0.0",
     "command-line-args": "^5.1.1"
   },
   "devDependencies": {

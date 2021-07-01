@@ -3,4 +3,4 @@ build/
 dist/*
 
 !dist/bundle.cjs
-!dist/index.js
+!dist/anzen.js

@@ -25,6 +25,6 @@ export async function anzenWrite(path: string, buf: Buffer | Uint8Array): Promis
     } catch (e) {
         error('ERR', 'There was an error while writing the file.');
         error((e as Error).name, (e as Error).message);
-        return process.exit();
+        return process.exit(1);
     }
 }

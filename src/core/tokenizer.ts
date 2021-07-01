@@ -1,11 +1,12 @@
-import { isAlphabetic, isBracket, isNumeric, isOperator, isSpace } from '../utils/value.js';
 import { Anzen } from '../../types/global';
+import { error } from '../utils/error.js';
 
-export function tokenizer(input: string): Array<Anzen.Token> {
+export function tokenizer(input: string): Array<Anzen.Token> | never {
+    const trimmed = input.trim();
     const tokens: Array<Anzen.Token> = [];
     let count = 0;
-
-    while (count < input.length) {
+    
+    while (count < trimmed.length) {
         let now = input[count] as string;
 
         if (isSpace(now)) {
@@ -13,6 +14,7 @@ export function tokenizer(input: string): Array<Anzen.Token> {
         }
 
         else if (isBracket(now)) {
+            count += 1;
             tokens.push({ type: 'Brckt', value: now });
         }
 
@@ -33,14 +35,14 @@ export function tokenizer(input: string): Array<Anzen.Token> {
             tokens.push({ type: 'Num', value });
         }
 
-        else if (isAlphabetic(now) && !isNumeric(now)) {
+        else if (isAlphabetic(now) || now === '_') {
             let value = now;
             count += 1;
 
             if (count < input.length) {
                 now = input[count] as string;
 
-                while (isAlphabetic(now)) {
+                while (isAlphabetic(now) || isNumeric(now) || now === '_') {
                     value += now;
                     count += 1;
                     now = input[count] as string;
@@ -66,7 +68,32 @@ export function tokenizer(input: string): Array<Anzen.Token> {
 
             tokens.push({ type: 'Op', value });
         }
+
+        else {
+            error('INVALID', 'Invalid character: ' + now);
+            return process.exit(1);
+        }
     }
 
     return tokens;
+}
+
+function isSpace(c: string): boolean {
+    return c === ' ' || c === '\n';
+}
+
+function isBracket(c: string): boolean {
+    return c === '[' || c === ']' || c === '(' || c === ')' || c === '{' || c === '}';
+}
+
+function isNumeric(c: string): boolean {
+    return c >= '0' && c <= '9';
+}
+
+function isAlphabetic(c: string): boolean {
+    return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
+}
+
+function isOperator(c: string): boolean {
+    return (c >= '!' && c <= '~') && (!isBracket(c) && !isAlphabetic(c) && !isNumeric(c));
 }

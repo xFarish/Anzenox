@@ -2,10 +2,10 @@ import { readFileSync } from 'fs';
 import { parse } from './utils/args.js';
 
 export async function main() {
+    const { name, version } = JSON.parse(readFileSync('./package.json', 'utf8'));
     const cli = parse();
 
-    if ((cli as any).help) {
-        const { name, version } = JSON.parse(readFileSync('./package.json', 'utf8'));
+    if ((cli as any).help || !Object.keys(cli).length) {
         const help = [
             `${name}@${version}`,
             'Syntax:  azc [Command] [Option] [File]',
@@ -28,5 +28,9 @@ export async function main() {
         ];
 
         return console.log(help.join('\n'));
+    }
+
+    else if ((cli as any).version) {
+        return console.log(`Version: ${version}`);
     }
 }

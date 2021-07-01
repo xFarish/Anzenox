@@ -3,13 +3,19 @@ import { error } from '../utils/error.js';
 
 export async function execute(path: string): Promise<void | never> {
     try {
-        const buf = await anzenRead(path);
+        if (!path.endsWith('.anc')) {
+            error('ERR', 'Unable to execute source file');
+            return process.exit(1);
+        }
+
+        const buf = await anzenRead(path) as Buffer;
 
         const wasmModule = new WebAssembly.Module(buf);
-        const wasmInstance = new WebAssembly.Instance(wasmModule);
-        const main = wasmInstance.exports['main'] as CallableFunction;
+        const wasmInstance = new WebAssembly.Instance(wasmModule, {});
 
-        console.log(main().toString());
+        const main = wasmInstance.exports['main'] as () => void;
+
+        return main();
     } catch (e) {
         error('ERR', 'There was an error while executing the bytecodes');
         error((e as Error).name, (e as Error).message);
