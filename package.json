@@ -8,6 +8,7 @@
     "azc": "dist/anzen.js"
   },
   "scripts": {
+    "dev": "npm run ts && npm run bundle",
     "bundle": "node bundle.cjs",
     "ts": "npx tsc",
     "watch": "npx tsc --watch",

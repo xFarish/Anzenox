@@ -19,3 +19,6 @@ $ git clone ssh://git@github.com/xFarish/Anzen
 $ cd Anzen
 $ npm i
 ```
+
+# Contributing
+For more info on how to contribute, you can read the [`Contributing.md`](https://github.com/xFarish/Anzen/blob/main/doc/Contributing.md 'Contributing.md')

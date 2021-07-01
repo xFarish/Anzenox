@@ -1,20 +1,20 @@
 import { promises, existsSync } from 'fs';
-import { error } from '../utils/error.js';
+import { error } from '../utils/log.js';
 
 export async function anzenWrite(path: string, buf: Buffer | Uint8Array): Promise<void | never> {
     try {
         if (!path.toString().endsWith('.anc')) {
-            error('INVALID', 'The file must ends with \'.anc\'.');
+            error('ERR', 'The file must ends with \'.anc\'.');
             return process.exit(1);
         }
 
         else if (!existsSync(path)) {
-            error('INVALID', 'The path specified is invalid.');
+            error('ERR', 'The path specified is ERR.');
             return process.exit(1);
         }
     
         else if ((await promises.stat(path)).isDirectory()) {
-            error('INVALID', 'The path given is a directory. Expected a file.');
+            error('ERR', 'The path given is a directory. Expected a file.');
             return process.exit(1);
         }
 

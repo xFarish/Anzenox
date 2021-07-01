@@ -4,7 +4,7 @@ export namespace Anzen {
         value: string;
     }
 
-    type TokenType = 'Brckt' | 'Num' | 'Wrd' | 'Op'
+    type TokenType = 'Bracket' | 'Number' | 'Word' | 'Operator' | 'Main'
     
     interface AST {
         type: string;

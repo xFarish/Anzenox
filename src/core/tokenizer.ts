@@ -1,7 +1,14 @@
 import { Anzen } from '../../types/global';
-import { error } from '../utils/error.js';
+import { error } from '../utils/log.js';
 
 export function tokenizer(input: string): Array<Anzen.Token> | never {
+
+    if (!input.includes('main()')) {
+        error('ERR', 'Main function not found');
+        error('ERR', 'Please make sure your source code includes a main function');
+        return process.exit(1);
+    }
+
     const trimmed = input.trim();
     const tokens: Array<Anzen.Token> = [];
     let count = 0;
@@ -15,7 +22,7 @@ export function tokenizer(input: string): Array<Anzen.Token> | never {
 
         else if (isBracket(now)) {
             count += 1;
-            tokens.push({ type: 'Brckt', value: now });
+            tokens.push({ type: 'Bracket', value: now });
         }
 
         else if (isNumeric(now)) {
@@ -32,7 +39,7 @@ export function tokenizer(input: string): Array<Anzen.Token> | never {
                 }
             }
 
-            tokens.push({ type: 'Num', value });
+            tokens.push({ type: 'Number', value });
         }
 
         else if (isAlphabetic(now) || now === '_') {
@@ -49,7 +56,12 @@ export function tokenizer(input: string): Array<Anzen.Token> | never {
                 }
             }
 
-            tokens.push({ type: 'Wrd', value });
+            if (value === 'main' && (input[count + 1] === '(' && input[count + 2] === ')')) {
+                count += 2;
+                tokens.push({ type: 'Main', value: 'main()' });
+            } else {
+                tokens.push({ type: 'Word', value });
+            }
         }
 
         else if (isOperator(now)) {
@@ -66,11 +78,11 @@ export function tokenizer(input: string): Array<Anzen.Token> | never {
                 }
             }
 
-            tokens.push({ type: 'Op', value });
+            tokens.push({ type: 'Operator', value });
         }
 
         else {
-            error('INVALID', 'Invalid character: ' + now);
+            error('ERR', 'ERR character: ' + now);
             return process.exit(1);
         }
     }

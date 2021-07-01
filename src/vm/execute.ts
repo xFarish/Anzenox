@@ -1,5 +1,5 @@
 import { anzenRead } from './read.js';
-import { error } from '../utils/error.js';
+import { error } from '../utils/log.js';
 
 export async function execute(path: string): Promise<void | never> {
     try {

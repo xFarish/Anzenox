@@ -8,9 +8,9 @@ export async function main() {
     if ((cli as any).help || !Object.keys(cli).length) {
         const help = [
             `${name}@${version}`,
-            'Syntax:  azc [Command] [Option] [File]',
-            'Example: azc exec main.azc',
-            '         azc compile --optimize main.az',
+            'Syntax:  azc [Option] [--exac | --compile] [File]',
+            'Example: azc --exec main.azc',
+            '         azc --optimize --compile main.az',
             '         azc --version',
             '',
             'Command:',
@@ -21,6 +21,10 @@ export async function main() {
             '    v, version     Show the current version',
             '    h, help        Show this message',
             '    o, optimize    Optimize the speed',
+            '    e, exec        Execute the compiled bytecode',
+            '    c, compile     Compile the given file to bytecode',
+            '                   to be executed later.',
+            '                   Use the \'--exec\' flag to execute',
             '',
             'File:',
             '    *.az           Anzen source code',
