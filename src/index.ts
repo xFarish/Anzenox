@@ -8,14 +8,10 @@ export async function main() {
     if ((cli as any).help || !Object.keys(cli).length) {
         const help = [
             `${name}@${version}`,
-            'Syntax:  azc [Option] [--exac | --compile] [File]',
+            'Syntax:  azc [option] [--exac | --compile] [file]',
             'Example: azc --exec main.azc',
             '         azc --optimize --compile main.az',
             '         azc --version',
-            '',
-            'Command:',
-            '    exec           Execute the compiled bytecode',
-            '    compile        Compile the source file to bytecodes and execute it later',
             '',
             'Option:',
             '    v, version     Show the current version',

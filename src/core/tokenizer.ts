@@ -2,40 +2,40 @@ import { Anzen } from '../../types/global';
 import { error } from '../utils/log.js';
 
 export function tokenizer(input: string): Array<Anzen.Token> | never {
+    input = input.trim();
 
-    if (!input.includes('main()')) {
-        error('ERR', 'Main function not found');
-        error('ERR', 'Please make sure your source code includes a main function');
-        return process.exit(1);
-    }
-
-    const trimmed = input.trim();
     const tokens: Array<Anzen.Token> = [];
-    let count = 0;
+    let index = 0;
     
-    while (count < trimmed.length) {
-        let now = input[count] as string;
+    while (index < input.length) {
+        let now = input[index] as string;
 
         if (isSpace(now)) {
-            count += 1;
+            index += 1;
+        }
+
+        else if (now === '#') {
+            while (index < input.length && input[index] !== '\n') {
+                index += 1;
+            }
         }
 
         else if (isBracket(now)) {
-            count += 1;
+            index += 1;
             tokens.push({ type: 'Bracket', value: now });
         }
 
         else if (isNumeric(now)) {
             let value = now;
-            count += 1;
+            index += 1;
 
-            if (count < input.length) {
-                now = input[count] as string;
+            if (index < input.length) {
+                now = input[index] as string;
 
                 while (isNumeric(now)) {
                     value += now;
-                    count += 1;
-                    now = input[count] as string;
+                    index += 1;
+                    now = input[index] as string;
                 }
             }
 
@@ -44,37 +44,50 @@ export function tokenizer(input: string): Array<Anzen.Token> | never {
 
         else if (isAlphabetic(now) || now === '_') {
             let value = now;
-            count += 1;
+            index += 1;
 
-            if (count < input.length) {
-                now = input[count] as string;
+            if (index < input.length) {
+                now = input[index] as string;
 
                 while (isAlphabetic(now) || isNumeric(now) || now === '_') {
                     value += now;
-                    count += 1;
-                    now = input[count] as string;
+                    index += 1;
+                    now = input[index] as string;
                 }
             }
 
-            if (value === 'main' && (input[count + 1] === '(' && input[count + 2] === ')')) {
-                count += 2;
-                tokens.push({ type: 'Main', value: 'main()' });
-            } else {
-                tokens.push({ type: 'Word', value });
-            }
+            tokens.push({ type: 'Identifier', value });
         }
 
-        else if (isOperator(now)) {
-            let value = now;
-            count += 1;
+        else if (now === '"' || now === '\'') {
+            let type = now;
+            let value = '';
+            index += 1;
+            now = input[index] as string;
 
-            if (count < input.length) {
-                now = input[count] as string;
+            while (now !== type) {
+                value += now;
+                index += 1;
+                now = input[index] as string;
+            }
+
+            index += 1;
+            now = input[index] as string;
+
+            tokens.push({ type: 'String', value });
+        }
+
+        else if (isOperator(now) && now !== '#') {
+            let value = now;
+            index += 1;
+
+            if (index < input.length) {
+                now = input[index] as string;
 
                 while (isOperator(now)) {
                     value += now;
-                    count += 1;
-                    now = input[count] as string;
+                    index += 1;
+                    now = input[index] as string;
                 }
             }
 
