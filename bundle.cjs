@@ -1,5 +1,5 @@
 require('esbuild').build({
-    entryPoints: ['./dist/anzen/index.js'],
+    entryPoints: ['./dist/anzenox/index.js'],
     outfile: './dist/bundle.cjs',
     bundle: true,
     platform: 'node',

@@ -131,7 +131,7 @@ export function parser(tokens: Array<Anzen.Token>): Anzen.AST | never {
                 }
 
                 case '&&': return {
-                    type: 'And',
+                    type: 'AndAnd',
                     value: '&&'
                 }
 
@@ -202,28 +202,57 @@ export function parser(tokens: Array<Anzen.Token>): Anzen.AST | never {
             }
         }
 
-        else if (token.type === 'Bracket' && (token.value === '[' || token.value === '{' || token.value === '(')) {
-            
-            let type = token.value;
+        else if (token.type === 'Bracket' && token.value == '[') {
             index += 1;
             token = tokens[index] as Anzen.Token;
-            const node: Anzen.Node = {
-                type: '',
-                value: []
-            };
 
-            if (type === '(') {
-                node.type = 'Paren';
-                type = ')';
-            } else if (type === '[') {
-                node.type = 'Square';
-                type = ']';
-            } else {
-                node.type = 'Block';
-                type = '}';
+            const node: Anzen.Node = {
+                type: 'Array',
+                value: []
             }
 
-            while (token.type !== 'Bracket' || (token.type === 'Bracket' && token.value !== type)) {
+            while (token.type !== 'Bracket' || (token.type === 'Bracket' && token.value !== ']')) {
+                node.value.push(walk());
+                token = tokens[index] as Anzen.Token;
+            }
+
+            index += 1;
+            return node;
+        }
+        
+        else if (token.type === 'Bracket' && token.value === '(') {
+            index += 1;
+            token = tokens[index] as Anzen.Token;
+
+            const node: Anzen.Node = {
+                type: 'CodeCave',
+                value: []
+            }
+
+            let prev = tokens[index - 2];
+            if (typeof(prev) !== 'undefined' && prev.type === 'Identifier') {
+                node.name = prev.value;
+            }
+
+            while (token.type !== 'Bracket' || (token.type === 'Bracket' && token.value !== ')')) {
+                node.value.push(walk());
+                token = tokens[index] as Anzen.Token;
+            }
+
+            index += 1;
+            return node;
+        }
+
+        else if (token.type === 'Bracket' && token.value === '{') {
+            index += 1;
+            token = tokens[index] as Anzen.Token;
+
+            const node: Anzen.Node = {
+                type: 'Block',
+                value: []
+            }
+
+            while (token.type !== 'Bracket' || (token.type === 'Bracket' && token.value !== '}')) {
                 node.value.push(walk());
                 token = tokens[index] as Anzen.Token;
             }

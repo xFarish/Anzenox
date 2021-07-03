@@ -1,11 +1,11 @@
 {
-  "name": "anzen",
+  "name": "anzenox",
   "version": "1.0.0",
   "description": "A simple language written in JavaScript using NodeJS",
-  "main": "dist/anzen.js",
+  "main": "dist/anzenox.js",
   "type": "module",
   "bin": {
-    "azc": "dist/anzen.js"
+    "azc": "dist/anzenox.js"
   },
   "scripts": {
     "dev": "npm run ts && npm run bundle",
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xFarish/Underscore.git"
+    "url": "git+https://github.com/xFarish/Anzenox.git"
   },
   "keywords": [
     "language"
@@ -24,9 +24,9 @@
   "author": "Farish",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/xFarish/Underscore/issues"
+    "url": "https://github.com/xFarish/Anzenox/issues"
   },
-  "homepage": "https://github.com/xFarish/Underscore#readme",
+  "homepage": "https://github.com/xFarish/Anzenox#readme",
   "dependencies": {
     "binaryen": "^101.0.0",
     "command-line-args": "^5.1.1"

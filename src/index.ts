@@ -21,6 +21,8 @@ export async function main() {
             '    c, compile     Compile the given file to bytecode',
             '                   to be executed later.',
             '                   Use the \'--exec\' flag to execute',
+            '    o, output      The path to the output file. Defaults',
+            '                   to ./[file].azc (PWD)',
             '',
             'File:',
             '    *.az           Anzen source code',
