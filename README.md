@@ -1,4 +1,4 @@
-# Anzen
+# Anzenox
 💻 A simple language written in JavaScript using NodeJS
 
 # Getting started
@@ -11,14 +11,14 @@
 Use [`git`](https://git-scm.com/ 'Git') to clone this projects
 ```sh
 # Using HTTPS
-$ git clone https://github.com/xFarish/Anzen
+$ git clone https://github.com/xFarish/Anzenox
 
 # Using SSH
-$ git clone ssh://git@github.com/xFarish/Anzen
+$ git clone ssh://git@github.com/xFarish/Anzenox
 
 $ cd Anzen
 $ npm i
 ```
 
 # Contributing
-For more info on how to contribute, you can read the [`Contributing.md`](https://github.com/xFarish/Anzen/blob/main/doc/Contributing.md 'Contributing.md')
+For more info on how to contribute, you can read the [`Contributing.md`](https://github.com/xFarish/Anzen0x/blob/main/doc/Contributing.md 'Contributing.md')
